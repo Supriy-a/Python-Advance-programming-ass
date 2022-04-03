@@ -1,0 +1,78 @@
+def pentagonal(n):
+    if n>=1:
+        return ((5*n**2)-(5*n)+2)//2
+    return "Enter n greater than 1"
+
+***************************************
+pentagonal(1)
+*************************
+pentagonal(2)
+*******************
+pentagonal(3) 
+******************
+pentagonal(0)
+
+****************
+pentagonal(8)
+****************
+Q2
+def encrypt(string):
+    vowels = 'aeiou'
+    code = {'a' : '0',
+            'e' : '1',
+            'i' : '2',
+            'o' : '2',
+            'u' : '3'}
+    l = []
+    string = str(string[::-1])
+    for i in string:
+        for j in vowels:
+            if i == j:
+                string = string.replace(i, str(code[i]))
+    return string+'aca'
+        
+*****************************************
+encrypt("karaca") 
+********************
+encrypt("banana")
+****************
+encrypt("burak")
+*********************
+encrypt("alpaca")
+
+****************************
+Q3
+import datetime
+***********************
+def has_friday_13(month, year):
+    return(True if datetime.datetime.strptime('13 '+' '+str(month)+' '+str(year), '%d %m %Y').weekday()==4 else False) 
+********************************************************************************************************************************
+has_friday_13(3, 2020) 
+************************************
+has_friday_13(10, 2017)
+******************************
+has_friday_13(1, 1985)
+
+*************************
+import re
+lst = ['bad cookie', 'good cookie', 'bad cookie', 'good cookie', 'good cookie']
+pattern = 'bad\s\w'
+len(re.findall(pattern, ', '.join(lst)))
+********************************************
+Q5
+def pluralize(l):
+    l1 = []
+    for i in l:
+        if l.count(i)>1:
+            l1.append(i+'s')
+        else:
+            l1.append(i)
+    return set(l1)
+
+******************************
+pluralize(["cow", "pig", "cow", "cow"])
+
+**************************************
+pluralize(["table", "table", "table"])
+*************************************
+pluralize(["chair", "pencil", "arm"])
