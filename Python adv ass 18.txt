@@ -1,0 +1,62 @@
+1.
+def track_robot(in_list):
+    output = [0,0]
+    for ele in in_list:
+        ele = ele.split(" ")
+        if ele[0] in ['right','left']:
+            output[0] = output[0]-int(ele[1]) if ele[0] == 'left' else output[0]+int(ele[1])
+        else:
+            output[1] = output[1]-int(ele[1]) if ele[0] == 'down' else output[1]+int(ele[1])
+    print(f'track_robot({in_list}) ➞ {output}')
+        
+track_robot(["right 10", "up 50", "left 30", "down 10"])
+track_robot([])
+track_robot(["right 100", "right 100", "up 500", "up 10000"])
+******************************************************************
+2.
+def find_longest(in_string):
+    len_list = []
+    for ele in in_string.split(' '):
+        len_list.append(len(ele))
+    print(f'find_longest({in_string}) ➞ {in_string.split(" ")[len_list.index(max(len_list))].lower()}')
+        
+find_longest("A thing of beauty is a joy forever.")
+find_longest("Forgetfulness is by all means powerless!")
+find_longest("\"Strengths\" is the longest and most commonly used word that contains only a single vowel.")
+*****************************************************************************************************************
+3.
+def interview(in_list, in_time):
+    output = 'qualified'
+    if in_time > 120 or max(in_list[0:2]) > 5 or max(in_list[2:4]) > 10 or max(in_list[4:6]) > 15 or max(in_list[6:8]) > 20 or len(in_list) != 8:
+            output = 'disqualified'
+    print(f'interview{in_list,in_time} ➞ {output}')
+    
+interview([5, 5, 10, 10, 15, 15, 20, 20], 120)
+interview([2, 3, 8, 6, 5, 12, 10, 18], 64)
+interview([5, 5, 10, 10, 25, 15, 20, 20], 120)
+interview([5, 5, 10, 10, 15, 15, 20], 120)
+interview([5, 5, 10, 10, 15, 15, 20, 20], 130)
+*****************************************************
+4.
+def chunkify(in_list,chunk_size):
+    output = []
+    for i in range(0,len(in_list),chunk_size):
+        output.append(in_list[i:i+chunk_size])
+    print(f'chunkify{in_list, chunk_size} ➞ {output}')
+    
+chunkify([2, 3, 4, 5], 2)   
+chunkify([2, 3, 4, 5, 6], 2)
+chunkify([2, 3, 4, 5, 6, 7], 3)
+chunkify([2, 3, 4, 5, 6, 7], 1)
+chunkify([2, 3, 4, 5, 6, 7], 7)
+*********************************************
+5.
+def get_prices(in_list):
+    out_list = []
+    for ele in in_list:
+        out_list.append(float((ele.split('$')[-1]).split(')')[0]))
+    print(f'get_prices({in_list}) ➞ {out_list}')
+        
+get_prices(["salad ($4.99)"])
+get_prices(["artichokes ($1.99)","rotiserrie chicken ($5.99)","gum ($0.75)"])
+get_prices(["ice cream ($5.99)","banana ($0.20)","sandwich ($8.50)","soup ($1.99)"])
