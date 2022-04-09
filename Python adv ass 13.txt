@@ -1,0 +1,61 @@
+1.
+def remove_letters(in_list,in_string):
+    in_list_copy = in_list.copy()
+    for ele in in_string:
+        if ele in in_list:
+            in_list.remove(ele)
+    print(f'remove_letters{in_list_copy,in_string} ➞ {in_list}')
+
+remove_letters(["s", "t", "r", "i", "n", "g", "w"], "string")
+remove_letters(["b", "b", "l", "l", "g", "n", "o", "a", "w"], "balloon")
+remove_letters(["d", "b", "t", "e", "a", "i"], "edabit")
+
+*************************************************************
+2.
+def blocks(in_num):
+    depth = in_num*3+((in_num)-1)*1
+    height = [x for x in range(2,in_num+2)]
+    print(f'blocks({in_num}) ➞ {depth+sum(height)}')
+        
+blocks(1)
+blocks(2)
+blocks(3)
+blocks(4)
+blocks(5)
+*****************************************************
+3.
+from operator import sub
+def my_sub(in_one,in_two):
+    output = sub(in_one,in_two) if in_one >= in_two else sub(in_two,in_one)
+    print(f'my_sub{in_one,in_two} ➞ {output}')
+    
+my_sub(5, 9)
+my_sub(10, 30)
+my_sub(0, 0)
+********************************************
+4.
+def add_bill(in_string):
+    out_num = 0
+    for ele in in_string.split(","):
+        if 'd' in ele:
+            if 'k' in ele:
+                out_num += int(ele.replace('d','').replace('k',''))*1000                
+            else:
+                out_num += int(ele.replace("d",''))
+    print(f'add_bill({in_string}) ➞ {out_num}')
+    
+add_bill("d20,p40,p60,d50")
+add_bill("p30,d20,p60,d150,p360")
+add_bill("p30,d2k,p60,d200,p360")
+******************************************
+5.
+def flip_list(in_list):
+    if len(in_list) > 0:
+        output = [ele[0] for ele in in_list] if isinstance(in_list[0],list) else [[ele] for ele in in_list]
+    else:
+        output = []
+    print(f'flip_list({in_list}) ➞ {output}')
+        
+flip_list([1,2,3,4]) 
+flip_list([[5],[6],[9]])
+flip_list([])
