@@ -1,0 +1,96 @@
+1.
+def count_same_ends(in_string):
+    special_chars = '!@#$%^&*.'
+    cleaned_string = ''
+    out_num = 0
+    for ele in in_string:
+        if ele not in special_chars:
+            cleaned_string += ele
+    for ele in cleaned_string.split(" "):
+        if ele[0].lower() == ele[-1].lower():
+            if len(ele) != 1:
+                out_num +=1
+    print(f'count_same_ends({in_string}) ➞ {out_num}')
+            
+count_same_ends("Pop! goes the balloon")
+count_same_ends("And the crowd goes wild!")
+count_same_ends("No I am not in a gang.")
+********************************************************
+2.
+def atbash(in_string):
+    alpha = 'abcdefghijklmnopqrstuvwxyz'
+    r_alpha = 'zyxwvutsrqponmlkjihgfedcba'
+    out_string = ''
+    for ele in in_string:
+        if ele not in " !1234567890":
+            out_string += r_alpha[alpha.index(ele.lower())].upper() if ele.isupper() else r_alpha[alpha.index(ele.lower())]
+        else:
+            out_string += ele
+    print(f'atbash({in_string}) ➞ {out_string}')
+        
+atbash("apple")
+atbash("Hello world!")
+atbash("Christmas is the 25th of December")
+*********************************************
+3.
+class Employee:
+    def __init__(self,name=None,salary=None,height=None,nationality=None):
+        self.name = name
+        self.firstname = name.split(" ")[0]
+        self.lastname = name.split(" ")[1]
+        self.salary = salary
+        self.height = height
+        self.nationality = nationality
+        
+john = Employee("John Doe")    
+mary = Employee("Mary Major",salary=120000)
+richard = Employee("Richard Roe", salary=110000, height=178)
+giancarlo = Employee("Giancarlo Rossi", salary=115000, height=182, nationality="Italian")
+
+print(f'john.name ➞ "{john.name}"')
+print(f'mary.lastname ➞ "{mary.lastname}"')
+print(f'richard.height ➞ {richard.height}')
+print(f'giancarlo.nationality ➞ "{giancarlo.nationality}"')
+
+************************************************************
+4.def can_see_stage(in_list):
+    transposed_list = []
+    for ele in range(len(in_list)):
+        temp_list = []
+        for item in range(len(in_list[ele])):
+            temp_list.append(in_list[item][ele])
+        transposed_list.append(temp_list)
+    output = True
+    for ele in transposed_list:
+        if ele != sorted(ele) or len(ele) != len(set(ele)):
+            output = False
+            break
+    print(f'can_see_stage({in_list}) ➞ {output}')
+        
+can_see_stage([[1, 2, 3],[4, 5, 6],[7, 8, 9]])
+can_see_stage([[0, 0, 0],[1, 1, 1],[2, 2, 2]])
+can_see_stage([[2, 0, 0],[1, 1, 1],[2, 2, 2]])
+can_see_stage([[1, 0, 0],[1, 1, 1],[2, 2, 2]])
+
+*****************************************************
+5.
+class Pizza:
+    order_count = 0
+    def __init__(self,ingredients=None):
+        self.ingredients = ingredients
+        self.order_number = Pizza.order_count+1
+        Pizza.order_count = self.order_number
+    def hawaiian(self):
+        self.ingredients = ['ham', 'pineapple']
+    def meat_festival(self):
+        self.ingredients = ['beef', 'meatball', 'bacon']
+    def garden_feast(self):
+        self.ingredients = ['spinach', 'olives', 'mushroom']
+        
+p1 = Pizza(["bacon", "parmesan", "ham"])
+p2 = Pizza()
+p2.garden_feast()
+print(f'p1.ingredients ➞ {p1.ingredients}')
+print(f'p2.ingredients ➞ {p2.ingredients}')
+print(f'p1.order_number ➞ {p1.order_number}')
+print(f'p2.order_number ➞ {p2.order_number}')
