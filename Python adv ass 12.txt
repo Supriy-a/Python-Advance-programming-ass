@@ -1,0 +1,88 @@
+def meme_sum(a,b):
+    a,b = str(a),str(b)
+    output = ''
+    while len(a) != len(b):
+        if len(a) < len(b):
+            a ='0'+a
+        else:
+            b='0'+b
+    for ele in range(len(a)):
+        output += str(int(a[ele])+int(b[ele]))
+    print(f'meme_sum{a,b} ➞ {output}')
+       
+meme_sum(26, 39)
+meme_sum(122, 81)
+meme_sum(1222, 30277) 
+
+********************************************************
+2.
+def next_prime(in_num):
+    in_num_clone = in_num
+    while True:
+        if (in_num-1)%6 == 0 or (in_num+1)%6 ==0 :
+            temp = in_num
+            for ele in range(3,in_num+1):
+                if in_num%ele == 0 and ele != in_num:
+                    in_num = in_num+1
+                    break
+            if temp == in_num:
+                break
+        else:
+            in_num += 1
+    
+    print(f'next_prine({in_num_clone}) ➞ {in_num}')
+        
+next_prime(12)
+next_prime(24)
+next_prime(11)
+*************************************************************
+3.
+def ave_spd(up_time,up_speed,down_speed):
+    distance = up_speed*(up_time/60)
+    down_time = distance/down_speed
+    output = (2*distance)/((up_time/60)+down_time)
+    print(f'ave_spd{up_time,up_speed,down_speed} ➞ {int(output)}')
+    
+ave_spd(18, 20, 60)
+ave_spd(30, 10, 30)
+ave_spd(30, 8, 24)
+********************************************************************
+4.
+def kempner(in_num):
+    def factorial(in_num):
+        if in_num == 1:
+            return 1
+        else:
+            return in_num * factorial(in_num-1)
+    for ele in range(1,in_num+1):
+        if factorial(ele)%in_num == 0:
+            output = ele
+            break
+    print(f'kempner({in_num}) ➞ {output}')
+            
+kempner(6)
+kempner(10)
+kempner(5)
+kempner(2)
+*******************************************************
+5.
+def boxes(in_list):
+    in_list_clone = in_list.copy()
+    output = []
+    temp_box = []
+    while True:
+        if len(in_list) != 0:
+            if sum(temp_box) <= 10:
+                temp_box.append(in_list.pop(0))
+            else:
+                in_list.insert(0,temp_box.pop())
+                output.append(temp_box)
+                temp_box = []
+        else:
+            output.append(temp_box)
+            temp_box = []
+            break
+    print(f'boxes({in_list_clone}) ➞ {output} ➞ {len(output)}')    
+    
+boxes([2, 1, 2, 5, 4, 3, 6, 1, 1, 9, 3, 2])
+boxes([5, 5, 5, 5, 5, 5, 2, 3, 4, 5, 6])
