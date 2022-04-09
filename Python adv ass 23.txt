@@ -1,0 +1,259 @@
+1.
+class Sudoku:
+    def __init__(self,in_string):
+        self.board = []
+        for ele in range(0,len(in_string),9):
+            self.board.append([int(string) for string in in_string[ele:ele+9]])
+            
+    def get_row(self,row):
+        return self.board[row]
+    
+    def get_col(self,column):
+        output = []
+        for ele in self.board:
+            output.append(ele[column])
+        return output
+    
+    def get_sqr(self,row,column=None):
+        output = []
+        square_to_cell = {
+            0 : [[0,1,2],[0,1,2]],
+            1 : [[0,1,2],[3,4,5]],
+            2 : [[0,1,2],[6,7,8]],
+            3 : [[3,4,5],[0,1,2]],
+            4 : [[3,4,5],[3,4,5]],
+            5 : [[3,4,5],[6,7,8]],
+            6 : [[6,7,8],[0,1,2]],
+            7 : [[6,7,8],[3,4,5]],
+            8 : [[6,7,8],[6,7,8]]
+        }
+        
+        if column == None:
+            for i in square_to_cell[row][0]:
+                for j in square_to_cell[row][1]:
+                    output.append(self.board[i][j])
+        else:
+            square = None
+            if row <= 2:
+                square = 0 if column <=2 else 1 if column <=5 else 2
+            elif row <= 5:
+                square = 3 if column <=2 else 4 if column <=5 else 5
+            else:
+                square = 6 if column <=2 else 7 if column <=5 else 8
+            for i in square_to_cell[square][0]:
+                for j in square_to_cell[square][1]:
+                    output.append(self.board[i][j])
+        return (output)
+                            
+game = Sudoku("417950030000000700060007000050009106800600000000003400900005000000430000200701580")
+display(game.board)
+print(f'game.get_row(0) ➞ {game.get_row(0)}')
+print(f'game.get_col(8) ➞ {game.get_col(8)}')
+print(f'game.get_sqr(1) ➞ {game.get_sqr(1)}')
+print(f'game.get_sqr(1,8) ➞ {game.get_sqr(1,8)}')
+print(f'game.get_sqr(8,3) ➞ {game.get_sqr(8,3)}')
+
+*****************************************************
+2.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+        self.num_list = []
+        self.num_list.append(val)       
+    def add_data(self,in_list):
+        self.num_list.extend(in_list)
+    def get_data(self):
+        return self.num_list
+    
+class add_two_numbers:
+    def __init__(self,ob1,ob2):
+        self.ob1 = ob1
+        self.ob2 = ob2  
+    def get_data(self):
+        it1 = ''.join([str(ele) for ele in self.ob1.get_data()[::-1]])
+        it2 = ''.join([str(ele) for ele in self.ob2.get_data()[::-1]])
+        return [int(x) for x in str(int(it1)+int(it2))[::-1]]   
+    
+lt1 = ListNode(2)
+lt1.add_data([4, 3])
+
+lt2 = ListNode(5)
+lt2.add_data([6, 4])
+
+print(f'lt1.get_data() ➞ {lt1.get_data()}') 
+print(f'lt2.get_data() ➞ {lt2.get_data()}') 
+print(f'add_two_numbers(lt1, lt2).get_data() ➞ {add_two_numbers(lt1, lt2).get_data()}',end='\n\n')
+
+lt1 = ListNode(0)
+lt2 = ListNode(0)
+
+print(f'lt1.get_data() ➞ {lt1.get_data()}') 
+print(f'lt2.get_data() ➞ {lt2.get_data()}') 
+print(f'add_two_numbers(lt1, lt2).get_data() ➞ {add_two_numbers(lt1, lt2).get_data()}',end='\n\n')
+
+lt1 = ListNode(9)
+lt1.add_data([9,9,9,9,9,9])
+
+lt2 = ListNode(9)
+lt2.add_data([9,9,9])
+
+print(f'lt1.get_data() ➞ {lt1.get_data()}') 
+print(f'lt2.get_data()➞ {lt2.get_data()}') 
+print(f'add_two_numbers(lt1, lt2).get_data() ➞ {add_two_numbers(lt1, lt2).get_data()}')
+*************************************************************************************************
+3
+Menu = [
+    {'name':'Orange Juice','type':'drink','price':25.50},
+    {'name':'Lemonade','type':'drink','price':10},
+    {'name':'Cranberry Juice','type':'drink','price':40},
+    {'name':'Pineapple Juice','type':'drink','price':40},
+    {'name':'Lemon Iced Tea','type':'drink','price':80},
+    {'name':'Vanilla Chai Latte','type':'drink','price':90},
+    {'name':'Hot Choclate','type':'drink','price':100},
+    {'name':'Iced Cofee','type':'drink','price':70.12},
+    {'name':'Tuna Sandwich','type':'food','price':120},
+    {'name':'Ham Cheese Sandwich','type':'food','price':180},
+    {'name':'Bacon And Egg','type':'food','price': 120},
+    {'name':'Chicken Biryani','type':'food','price':360},
+    {'name':'Veg Burger','type':'food','price':90},
+    {'name':'Cinnamon Roll','type':'food','price':60.25}
+]
+
+class Cofeeshop:
+    def __init__(self,name,menu,orders):
+        self.name = name
+        self.menu = menu
+        self.orders = orders
+    
+    def add_order(self, order_name):
+        available_items = [item['name'].lower() for item in self.menu]
+        if order_name in available_items:
+            output = "Order added!"
+            self.orders.append(order_name)
+        else:
+            output = "This item is currently unavailable!"
+        return output
+    
+    def list_orders(self):
+        return self.orders
+    
+    def due_amount(self):
+        output = sum([item['price'] for item in self.menu if item['name'].lower() in self.orders])
+        return output
+    
+    def fulfill_order(self):
+        if len(self.orders) > 0:
+            output = f'The {self.orders.pop(0)} is ready!'
+        else:
+output = 'All orders have been fulfilled!'
+        return output
+        
+    def cheapest_item(self):
+        lowest_price = min([item['price'] for item in self.menu])
+        output = [item['name'] for item in self.menu if item['price'] == lowest_price]
+        return output[0]
+        
+    def drinks_only(self):
+        output = [item['name'] for item in self.menu if item['type'] == 'drink']
+        return output
+    
+    def food_only(self):
+        output = [item['name'] for item in self.menu if item['type'] == 'food']
+        return output
+    
+tcs = Cofeeshop('Tesha\'s Cofee Shop',Menu,[])
+print(f'tcs.add_order("hot cocoa") ➞ {tcs.add_order("hot cocoa")}')
+print(f'tcs.add_order("iced tea") ➞ {tcs.add_order("iced tea")}')
+print(f'tcs.add_order("cinnamon roll") ➞ {tcs.add_order("cinnamon roll")}')
+print(f'tcs.add_order("iced cofee") ➞ {tcs.add_order("iced cofee")}')
+print(f'tcs.list_orders() ➞ {tcs.list_orders()}')
+print(f'tcs.due_amount() ➞ {tcs.due_amount()}')
+print(f'tcs.fulfill_order() ➞ {tcs.fulfill_order()}')
+print(f'tcs.fulfill_order() ➞ {tcs.fulfill_order()}')
+print(f'tcs.fulfill_order() ➞ {tcs.fulfill_order()}')
+print(f'tcs.list_orders() ➞ {tcs.list_orders()}')
+print(f'tcs.due_amount() ➞ {tcs.due_amount()}')
+print(f'tcs.cheapest_item() ➞ {tcs.cheapest_item()}')
+print(f'tcs.food_only() ➞ {tcs.food_only()}')
+print(f'tcs.drinks_only() ➞ {tcs.drinks_only()}')
+***************************************************************
+4.
+def loneliest_number(start,end):
+    prime_list = []
+    output = {'number': 0, 'distance': 0, 'closest': 0}
+    temp = []
+    if start <=3: prime_list.extend([2,3])
+    for ele in range(start,end+1):
+        if (ele-1)%6 == 0 or (ele+1)%6 == 0: prime_list.append(ele) # initial check
+    for ele in prime_list:
+        for item in range(2,ele):
+            if ele%item == 0 :
+                temp.append(ele)
+                break    
+    prime_list = sorted(set(prime_list)-set(temp))
+    if start in [4,5] : print(3) ; prime_list.insert(0,3) # Logic to get first prime number before start
+    else:
+        for ele in range(start-1,0,-1):
+            if (ele-1)%6 == 0 or (ele+1)%6 == 0:
+                prime_list.insert(0,ele)
+                break
+    while True: # Logic to get first prime number after end
+        if (end-1)%6 == 0 or (end+1)%6 == 0:
+            out_num = None
+            for ele in range(2,end):
+                if end%ele == 0:
+                    out_num = ele
+                    break
+            if out_num == None:prime_list.append(end) ; break
+            else: end +=1
+        else:
+            end+=1          
+    if 1 in prime_list: prime_list.remove(1)                 
+    for ele in range(start,end):
+        org_ele = ele
+        while True:
+            if ele in prime_list:
+                n_f_prime = ele if ele != org_ele else prime_list[prime_list.index(ele)+1]
+                n_b_prime = prime_list[prime_list.index(ele)-1] if prime_list.index(ele) > 0 else 0
+                closest_distance = min(org_ele-n_b_prime,n_f_prime-org_ele) if n_b_prime !=0 else n_f_prime-org_ele 
+                closest_prime = n_f_prime if n_b_prime == 0 or closest_distance == n_f_prime-org_ele else n_b_prime
+                if output['distance'] < closest_distance:
+                    output = {'number': org_ele, 'distance': closest_distance, 'closest': closest_prime}
+                break
+            else:
+                ele +=1
+    print(f'loneliest_number{start,end} ➞ {output}')
+               
+loneliest_number(0,22)
+loneliest_number(8, 123)
+loneliest_number(938, 1190) 
+loneliest_number(120, 1190)
+****************************************************
+5.
+class Selfie:
+    def __init__(self,x=None):
+        self.x = x
+        self.archived_states = []
+    def save_state(self):
+        self.archived_states.append(self.x)
+        self.x = None
+        return self.archived_states
+    def recover_state(self,in_num):
+        if in_num >=0 and in_num <= len(self.archived_states):
+            self.x = self.archived_states[in_num]
+        return self
+        
+p = Selfie()
+p.x = 2
+print(f'p.__dict__  ➞ {p.__dict__}')
+p.save_state()
+print(f'p.__dict__  ➞ {p.__dict__}')
+p.x = 5
+print(f'p.__dict__  ➞ {p.__dict__}')
+p.save_state()
+print(f'p.__dict__  ➞ {p.__dict__}')
+p = p.recover_state(0)
+print(f'p.__dict__  ➞ {p.__dict__}')
+print(f'p.x ➞ {p.x}')
+*************************************************************
